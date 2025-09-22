@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epic Warrior Portfolio</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Georgia', serif;
+        overflow-x: hidden;
+        background: #2a1810;
+        color: #f4e4d0;
+    }
+
+    /* Epic Background with 3-Column Layout for Classical Warrior Portrait */
+    .epic-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -2;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        background: linear-gradient(45deg, rgba(139, 69, 19, 0.4), rgba(160, 82, 45, 0.3), rgba(205, 133, 63, 0.4));
+        filter: brightness(0.8) contrast(1.1);
+        will-change: transform;
+    }
+
+    /* Left ornamental column */
+    .epic-bg::before {
+        content: '';
+        background: 
+            linear-gradient(135deg, rgba(139, 69, 19, 0.6), rgba(160, 82, 45, 0.4)),
+            radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.2), transparent 50%),
+            radial-gradient(circle at 20% 80%, rgba(220, 20, 60, 0.2), transparent 50%);
+    }
+
+    /* Center column with the warrior portrait */
+    .epic-bg::after {
+        content: '';
+        background: 
+            linear-gradient(rgba(139, 69, 19, 0.2), rgba(160, 82, 45, 0.1)),
+            url(Portrait.png) center center/contain no-repeat;
+        background-size: contain;
+        background-position: center center;
+        min-width: 500px;
+        max-width: 800px;
+        width: 40vw;
+    }
+
+    /* Right ornamental column - using pseudo element alternative */
+    .epic-bg-right {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 30vw;
+        height: 100vh;
+        z-index: -2;
+        background: 
+            linear-gradient(45deg, rgba(139, 69, 19, 0.6), rgba(160, 82, 45, 0.4)),
+            radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.2), transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(220, 20, 60, 0.2), transparent 50%);
+    }
+
+    /* Animated Overlay */
+    .animated-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: linear-gradient(45deg, 
+            rgba(139, 69, 19, 0.4), 
+            rgba(160, 82, 45, 0.3), 
+            rgba(205, 133, 63, 0.4),
+            rgba(222, 184, 135, 0.2));
+        background-size: 400% 400%;
+        animation: epicShift 20s ease infinite;
+        opacity: 0;
+        transition: opacity 1s ease;
+    }
+
+    body.loaded .animated-overlay {
+        opacity: 1;
+    }
+
+    @keyframes epicShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* Golden Sunbeams */
+    .sunbeam {
+        position: fixed;
+        background: linear-gradient(90deg, 
+            transparent 0%, 
+            rgba(255, 215, 0, 0.1) 20%, 
+            rgba(255, 215, 0, 0.3) 50%, 
+            rgba(255, 215, 0, 0.1) 80%, 
+            transparent 100%);
+        width: 2px;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 2;
+        animation: sunbeamShine 8s linear infinite;
+        transform-origin: top;
+    }
+
+    @keyframes sunbeamShine {
+        0% {
+            transform: translateX(-100px) rotate(-5deg);
+            opacity: 0;
+        }
+        20% {
+            opacity: 1;
+        }
+        80% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateX(100vw) rotate(5deg);
+            opacity: 0;
+        }
+    }
+
+    /* Fire Sparks */
+    .fire-spark {
+        position: fixed;
+        background: radial-gradient(circle, #ff6b35 0%, #ff4500 30%, #dc143c 60%, transparent 80%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 3;
+        animation: sparkFly linear infinite;
+    }
+
+    @keyframes sparkFly {
+        0% {
+            transform: translate(0, 100vh) rotate(0deg) scale(1);
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.8;
+            transform: translate(50px, 50vh) rotate(180deg) scale(1.2);
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            transform: translate(100px, -100px) rotate(360deg) scale(0.5);
+            opacity: 0;
+        }
+    }
+
+    /* Gold Particles */
+    .gold-particle {
+        position: fixed;
+        background: radial-gradient(circle, #ffd700 0%, #ffed4e 40%, rgba(255, 215, 0, 0.8) 70%, transparent 100%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 4;
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        animation: goldFloat linear infinite;
+    }
+
+    @keyframes goldFloat {
+        0% {
+            transform: translateY(100vh) translateX(0) rotate(0deg);
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.9;
+            transform: translateY(50vh) translateX(20px) rotate(180deg);
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100px) translateX(-20px) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    /* Shimmer Waves */
+    .shimmer-wave {
+        position: fixed;
+        background: linear-gradient(45deg, 
+            transparent 0%, 
+            rgba(255, 215, 0, 0.2) 25%, 
+            rgba(255, 215, 0, 0.4) 50%, 
+            rgba(255, 215, 0, 0.2) 75%, 
+            transparent 100%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 1;
+        animation: shimmerExpand 6s ease-out infinite;
+    }
+
+    @keyframes shimmerExpand {
+        0% {
+            transform: scale(0) rotate(0deg);
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.6;
+        }
+        100% {
+            transform: scale(4) rotate(180deg);
+            opacity: 0;
+        }
+    }
+
+    /* Divine Light Rays */
+    .light-ray {
+        position: fixed;
+        background: linear-gradient(to bottom, 
+            rgba(255, 215, 0, 0.1), 
+            rgba(255, 215, 0, 0.3), 
+            rgba(255, 215, 0, 0.1));
+        width: 4px;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 1;
+        animation: divineLight 12s ease-in-out infinite;
+        transform-origin: top center;
+    }
+
+    @keyframes divineLight {
+        0% {
+            opacity: 0;
+            transform: rotate(-10deg) scaleY(0);
+        }
+        25% {
+            opacity: 0.8;
+            transform: rotate(-5deg) scaleY(1);
+        }
+        50% {
+            opacity: 1;
+            transform: rotate(0deg) scaleY(1.2);
+        }
+        75% {
+            opacity: 0.8;
+            transform: rotate(5deg) scaleY(1);
+        }
+        100% {
+            opacity: 0;
+            transform: rotate(10deg) scaleY(0);
+        }
+    }
+
+    /* Floating Embers */
+    .ember {
+        position: fixed;
+        background: radial-gradient(circle, #ff6b35 0%, #ff4500 50%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 3;
+        animation: emberFloat infinite ease-in-out;
+    }
+
+    @keyframes emberFloat {
+        0% {
+            transform: translateY(100vh) rotate(0deg);
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.8;
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100px) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    /* Fabric Waves */
+    .fabric-wave {
+        position: fixed;
+        border: 2px solid rgba(220, 20, 60, 0.3);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 1;
+        animation: fabricRipple 6s infinite ease-out;
+    }
+
+    @keyframes fabricRipple {
+        0% {
+            transform: scale(0);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(3);
+            opacity: 0;
+        }
+    }
+
+    /* Navigation */
+    .nav {
+        position: fixed;
+        top: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 100;
+        background: rgba(139, 69, 19, 0.4);
+        backdrop-filter: blur(15px);
+        border-radius: 50px;
+        padding: 1rem 2rem;
+        border: 2px solid rgba(255, 215, 0, 0.3);
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+    }
+
+    .nav ul {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+    }
+
+    .nav a {
+        color: #f4e4d0;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 0.7rem 1.5rem;
+        border-radius: 25px;
+        transition: all 0.4s ease;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+
+    .nav a:hover {
+        background: rgba(255, 215, 0, 0.2);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+        color: #ffd700;
+    }
+
+    /* Header Section */
+    .header {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .hero-content {
+        z-index: 10;
+        max-width: 900px;
+        padding: 3rem;
+        background: rgba(139, 69, 19, 0.2);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        border: 2px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .hero-title {
+        font-size: 4.5rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(45deg, #ffd700, #ff6b35, #dc143c);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        animation: heroGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroGlow {
+        from {
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+        }
+        to {
+            filter: drop-shadow(0 0 40px rgba(255, 215, 0, 1));
+        }
+    }
+
+    .hero-subtitle {
+        font-size: 1.8rem;
+        opacity: 0.95;
+        margin-bottom: 2rem;
+        color: #f4e4d0;
+        text-shadow: 0 0 15px rgba(220, 20, 60, 0.5);
+        animation: fadeInUp 1.5s ease-out 0.5s both;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 0.95;
+            transform: translateY(0);
+        }
+    }
+
+    /* Sections */
+    .section {
+        min-height: 100vh;
+        padding: 6rem 2rem;
+        position: relative;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .section-title {
+        font-size: 3.5rem;
+        text-align: center;
+        margin-bottom: 4rem;
+        background: linear-gradient(45deg, #ffd700, #ff6b35, #dc143c);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    }
+
+    /* Card Styles */
+    .card {
+        background: rgba(139, 69, 19, 0.3);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        padding: 3rem;
+        border: 2px solid rgba(255, 215, 0, 0.2);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(45deg, #ffd700, #ff6b35, #dc143c, #ffd700);
+        border-radius: 22px;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .card:hover::before {
+        opacity: 0.7;
+    }
+
+    .card:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: 0 25px 50px rgba(255, 215, 0, 0.3);
+    }
+
+    /* Portfolio Grid */
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 3rem;
+        margin-top: 4rem;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 3rem;
+        margin-top: 4rem;
+    }
+
+    .skill-icon {
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    }
+
+    /* Contact Form */
+    .contact-form {
+        max-width: 700px;
+        margin: 0 auto;
+        background: rgba(139, 69, 19, 0.3);
+        backdrop-filter: blur(15px);
+        border-radius: 25px;
+        padding: 4rem;
+        border: 2px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .form-group {
+        margin-bottom: 2.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.8rem;
+        font-weight: 600;
+        color: #ffd700;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 1.2rem;
+        background: rgba(139, 69, 19, 0.4);
+        border: 2px solid rgba(255, 215, 0, 0.3);
+        border-radius: 15px;
+        color: #f4e4d0;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #ffd700;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+        color: rgba(244, 228, 208, 0.6);
+    }
+
+    .submit-btn {
+        background: linear-gradient(45deg, #ffd700, #ff6b35);
+        color: #2a1810;
+        padding: 1.2rem 3rem;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        width: 100%;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
+        background: linear-gradient(45deg, #ff6b35, #ffd700);
+    }
+
+    /* About Section Special Styling */
+    .about-content {
+        text-align: center;
+        font-size: 1.3rem;
+        line-height: 2;
+        color: #f4e4d0;
+        text-shadow: 0 0 10px rgba(220, 20, 60, 0.2);
+    }
+
+    /* Responsive adjustments for 3-column layout */
+    @media (max-width: 1200px) {
+        .epic-bg::after {
+            width: 50vw;
+            min-width: 350px;
+        }
+        
+        .epic-bg-right {
+            width: 25vw;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .epic-bg {
+            grid-template-columns: 1fr;
+            justify-items: center;
+        }
+        
+        .epic-bg::before {
+            display: none;
+        }
+        
+        .epic-bg::after {
+            width: 100vw;
+            background-size: cover;
+            background-position: center center;
+        }
+        
+        .epic-bg-right {
+            display: none;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.4rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+        }
+        
+        .nav {
+            position: relative;
+            top: auto;
+            left: auto;
+            transform: none;
+            margin-bottom: 2rem;
+        }
+        
+        .nav ul {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+
+    /* New additions */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation: none !important;
+            transition: none !important;
+        }
+    }
+
+    /* Particle Burst Styles */
+    .particle-burst {
+        position: fixed;
+        pointer-events: none;
+        z-index: 5;
+        animation: particleBurst 1.5s ease-out forwards;
+    }
+
+    @keyframes particleBurst {
+        0% {
+            transform: scale(0) translate(0, 0);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(3) translate(var(--tx), var(--ty));
+            opacity: 0;
+        }
+    }
+
+    /* Mouse Effects */
+    .mouse-spotlight {
+        position: fixed;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 1;
+        transform: translate(-50%, -50%);
+        mix-blend-mode: screen;
+    }
+
+    .interactive-glow {
+        position: fixed;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(220,20,60,0.2) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 2;
+        transform: translate(-50%, -50%);
+        animation: pulseGlow 3s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+        0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.7; }
+        100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.9; }
+    }
+
+    .energy-wave {
+        position: fixed;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px solid rgba(255,215,0,0.5);
+        pointer-events: none;
+        z-index: 3;
+        transform: translate(-50%, -50%);
+        animation: energyPulse 2s infinite;
+    }
+
+    @keyframes energyPulse {
+        0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+    }
+</style>
+</head>
+<body>
+    <div class="epic-bg"></div>
+    <div class="epic-bg-right"></div>
+    <div class="animated-overlay"></div>
+    
+    <nav class="nav">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header id="home" class="header">
+    <div class="hero-content">
+        <h1 class="hero-title">ENTITY</h1>
+        <p class="hero-subtitle">Digital Artist & Computer Science Student</p>
+        <p class="hero-tagline">Where classical artistry meets digital innovation</p>
+    </div>
+</header>
+
+<section id="about" class="section">
+    <div class="container">
+        <h2 class="section-title">About Entity</h2>
+        <div class="card">
+            <div class="about-content">
+                <p>
+                    I'm Entity, a 2nd year Computer Science student with a deep passion for art. My work bridges 
+                    classical artistic traditions with modern digital techniques, creating pieces that honor the 
+                    masters while embracing contemporary technology.
+                </p>
+                <p>
+                    Through my studies in computer science, I've developed a unique perspective on digital art 
+                    creation, combining technical precision with artistic vision. My classical warrior portraits 
+                    represent this fusion - drawing inspiration from Renaissance and Baroque masters while utilizing 
+                    cutting-edge digital painting techniques.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="portfolio" class="section">
+    <div class="container">
+        <h2 class="section-title">Creative Disciplines</h2>
+        <div class="portfolio-grid">
+            <div class="card">
+                <div class="skill-icon">🎨</div>
+                <h3>Digital Art</h3>
+                <p>
+                    Classical portraiture with modern digital techniques, specializing in historical 
+                    and mythological subjects. Each piece combines traditional composition principles 
+                    with digital brushwork.
+                </p>
+            </div>
+            
+            <div class="card">
+                <div class="skill-icon">💻</div>
+                <h3>Computer Science</h3>
+                <p>
+                    2nd year CS student exploring the intersection of technology and creative 
+                    expression. Specializing in creative coding, generative art, and interactive 
+                    web experiences.
+                </p>
+            </div>
+            
+            <div class="card">
+                <div class="skill-icon">🏛️</div>
+                <h3>Classical Studies</h3>
+                <p>
+                    Deep appreciation for Greco-Roman culture, mythology, and historical artistic 
+                    traditions. This knowledge informs both my artistic subjects and technical approach.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="skills" class="section">
+    <div class="container">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="card" style="text-align: center;">
+                <div class="skill-icon">🖌️</div>
+                <h3>Digital Painting</h3>
+                <p>
+                    Professional proficiency in Photoshop, Procreate, and Corel Painter with 
+                    specialized knowledge in classical techniques adapted for digital media.
+                </p>
+            </div>
+            
+            <div class="card" style="text-align: center;">
+                <div class="skill-icon">👨‍💻</div>
+                <h3>AI & Machine Learning</h3>
+                <p>
+                   Developing intelligent systems with Python, TensorFlow, and PyTorch. Specializing in 
+        generative AI for artistic applications and computer vision for digital heritage 
+        preservation.
+                </p>
+            </div>
+            
+            <div class="card" style="text-align: center;">
+                <div class="skill-icon">📐</div>
+                <h3>3D Modeling</h3>
+                <p>
+                    Blender and ZBrush expertise for creating historically-accurate armor, weapons, 
+                    and environments to inform 2D works.
+                </p>
+            </div>
+            
+            <div class="card" style="text-align: center;">
+                <div class="skill-icon">📚</div>
+                <h3>Art History</h3>
+                <p>
+                    Formal study of Renaissance and Baroque techniques with particular focus on 
+                    portrait lighting and compositional theory.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="section">
+    <div class="container">
+        <h2 class="section-title">Connect</h2>
+        <form class="contact-form">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" rows="6" placeholder="Interested in commissioning artwork, collaborating on projects, or discussing the intersection of art and technology? I'd love to hear from you." required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+    </div>
+</section>
+
+    
+
+    <script>
+    // Golden Sunbeams
+    function createSunbeams() {
+        setInterval(() => {
+            const beam = document.createElement('div');
+            beam.className = 'sunbeam';
+            
+            const y = Math.random() * window.innerHeight;
+            const duration = Math.random() * 4 + 6;
+            const width = Math.random() * 3 + 2;
+            
+            beam.style.top = y + 'px';
+            beam.style.width = width + 'px';
+            beam.style.animationDuration = duration + 's';
+            
+            // Vary the golden intensity
+            const intensity = Math.random() * 0.3 + 0.2;
+            beam.style.background = `linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 215, 0, ${intensity * 0.3}) 20%, 
+                rgba(255, 215, 0, ${intensity}) 50%, 
+                rgba(255, 215, 0, ${intensity * 0.3}) 80%, 
+                transparent 100%)`;
+            
+            document.body.appendChild(beam);
+            
+            setTimeout(() => {
+                if (beam.parentNode) {
+                    beam.remove();
+                }
+            }, duration * 1000);
+        }, 2000);
+    }
+
+    // Fire Sparks
+    function createFireSparks() {
+        setInterval(() => {
+            const spark = document.createElement('div');
+            spark.className = 'fire-spark';
+            
+            const size = Math.random() * 4 + 2;
+            const x = Math.random() * window.innerWidth;
+            const duration = Math.random() * 3 + 4;
+            const delay = Math.random() * 1;
+            
+            spark.style.width = size + 'px';
+            spark.style.height = size + 'px';
+            spark.style.left = x + 'px';
+            spark.style.animationDuration = duration + 's';
+            spark.style.animationDelay = delay + 's';
+            
+            // Vary spark colors
+            if (Math.random() > 0.7) {
+                spark.style.background = 'radial-gradient(circle, #ff4500 0%, #dc143c 40%, #8b0000 70%, transparent 90%)';
+            }
+            
+            document.body.appendChild(spark);
+            
+            setTimeout(() => {
+                if (spark.parentNode) {
+                    spark.remove();
+                }
+            }, (duration + delay) * 1000);
+        }, 400);
+    }
+
+    // Gold Particles
+    function createGoldParticles() {
+        setInterval(() => {
+            const particle = document.createElement('div');
+            particle.className = 'gold-particle';
+            
+            const size = Math.random() * 6 + 3;
+            const x = Math.random() * window.innerWidth;
+            const duration = Math.random() * 5 + 8;
+            
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = x + 'px';
+            particle.style.animationDuration = duration + 's';
+            
+            // Add extra glow for some particles
+            if (Math.random() > 0.6) {
+                particle.style.boxShadow = '0 0 20px rgba(255, 215, 0, 1), 0 0 30px rgba(255, 215, 0, 0.5)';
+            }
+            
+            document.body.appendChild(particle);
+            
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.remove();
+                }
+            }, duration * 1000);
+        }, 200);
+    }
+
+    // Shimmer Waves
+    function createShimmerWaves() {
+        setInterval(() => {
+            const wave = document.createElement('div');
+            wave.className = 'shimmer-wave';
+            
+            const size = Math.random() * 80 + 40;
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            const duration = Math.random() * 3 + 4;
+            
+            wave.style.width = size + 'px';
+            wave.style.height = size + 'px';
+            wave.style.left = x + 'px';
+            wave.style.top = y + 'px';
+            wave.style.animationDuration = duration + 's';
+            
+            document.body.appendChild(wave);
+            
+            setTimeout(() => {
+                if (wave.parentNode) {
+                    wave.remove();
+                }
+            }, duration * 1000);
+        }, 3000);
+    }
+
+    // Divine Light Rays
+    function createDivineLightRays() {
+        setInterval(() => {
+            const ray = document.createElement('div');
+            ray.className = 'light-ray';
+            
+            const x = Math.random() * window.innerWidth;
+            const duration = Math.random() * 6 + 8;
+            const width = Math.random() * 3 + 2;
+            
+            ray.style.left = x + 'px';
+            ray.style.width = width + 'px';
+            ray.style.animationDuration = duration + 's';
+            
+            document.body.appendChild(ray);
+            
+            setTimeout(() => {
+                if (ray.parentNode) {
+                    ray.remove();
+                }
+            }, duration * 1000);
+        }, 4000);
+    }
+
+    // Enhanced Particle Bursts
+    function createParticleBursts() {
+        setInterval(() => {
+            // Create burst from portrait area on larger screens
+            if (window.innerWidth > 768) {
+                const portraitRect = document.querySelector('.epic-bg::after')?.getBoundingClientRect();
+                if (portraitRect) {
+                    createBurstAt(
+                        portraitRect.left + portraitRect.width/2,
+                        portraitRect.top + portraitRect.height/2,
+                        15
+                    );
+                }
+            }
+            
+            // Random bursts elsewhere
+            if (Math.random() > 0.7) {
+                createBurstAt(
+                    Math.random() * window.innerWidth,
+                    Math.random() * window.innerHeight,
+                    8
+                );
+            }
+        }, 5000);
+    }
+
+    function createBurstAt(x, y, count) {
+        for (let i = 0; i < count; i++) {
+            setTimeout(() => {
+                const particle = document.createElement('div');
+                particle.className = 'particle-burst';
+                
+                const size = Math.random() * 8 + 4;
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 50 + 30;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                const duration = Math.random() * 0.5 + 1;
+                const hue = 40 + Math.random() * 20; // Golden hues
+                
+                particle.style.cssText = `
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    --tx: ${tx}px;
+                    --ty: ${ty}px;
+                    animation-duration: ${duration}s;
+                    background: radial-gradient(circle, 
+                        hsl(${hue}, 100%, 50%) 0%, 
+                        hsl(${hue}, 100%, 30%) 50%, 
+                        transparent 70%);
+                    box-shadow: 0 0 15px hsl(${hue}, 100%, 50%);
+                `;
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, duration * 1000);
+            }, i * 50);
+        }
+    }
+
+    // Floating Embers
+    function createEmbers() {
+        setInterval(() => {
+            const ember = document.createElement('div');
+            ember.className = 'ember';
+            
+            const size = Math.random() * 6 + 3;
+            const x = Math.random() * window.innerWidth;
+            const duration = Math.random() * 8 + 10;
+            
+            ember.style.width = size + 'px';
+            ember.style.height = size + 'px';
+            ember.style.left = x + 'px';
+            ember.style.animationDuration = duration + 's';
+            
+            document.body.appendChild(ember);
+            
+            setTimeout(() => {
+                if (ember.parentNode) {
+                    ember.remove();
+                }
+            }, duration * 1000);
+        }, 300);
+    }
+
+    // Fabric Wave Ripples
+    function createFabricWaves() {
+        const header = document.querySelector('.header');
+        
+        setInterval(() => {
+            const wave = document.createElement('div');
+            wave.className = 'fabric-wave';
+            
+            const size = Math.random() * 100 + 50;
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            
+            wave.style.width = size + 'px';
+            wave.style.height = size + 'px';
+            wave.style.left = x + 'px';
+            wave.style.top = y + 'px';
+            
+            header.appendChild(wave);
+            
+            setTimeout(() => {
+                if (wave.parentNode) {
+                    wave.remove();
+                }
+            }, 6000);
+        }, 3000);
+    }
+
+    // Mouse Following Effects
+    function createMouseTrail() {
+        const spotlight = document.createElement('div');
+        spotlight.className = 'mouse-spotlight';
+        
+        const glow = document.createElement('div');
+        glow.className = 'interactive-glow';
+        
+        const wave = document.createElement('div');
+        wave.className = 'energy-wave';
+        
+        document.body.appendChild(spotlight);
+        document.body.appendChild(glow);
+        document.body.appendChild(wave);
+        
+        let lastX = 0;
+        let lastY = 0;
+        let mouseX = 0;
+        let mouseY = 0;
+        let scale = 1;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Calculate speed for dynamic effects
+            const speed = Math.sqrt(
+                Math.pow(mouseX - lastX, 2) + 
+                Math.pow(mouseY - lastY, 2)
+            );
+            
+            lastX = mouseX;
+            lastY = mouseY;
+            
+            // Dynamic scaling based on speed
+            scale = Math.min(1 + speed / 50, 1.5);
+            
+            // Update positions with slight delay for smoother effect
+            setTimeout(() => {
+                spotlight.style.transform = `translate(-50%, -50%) scale(${1/scale})`;
+                spotlight.style.left = `${mouseX}px`;
+                spotlight.style.top = `${mouseY}px`;
+                
+                glow.style.left = `${mouseX}px`;
+                glow.style.top = `${mouseY}px`;
+                
+                wave.style.left = `${mouseX}px`;
+                wave.style.top = `${mouseY}px`;
+            }, 50);
+        });
+        
+        // Create occasional energy waves on click
+        document.addEventListener('click', (e) => {
+            createBurstAt(e.clientX, e.clientY, 10);
+            
+            // Bigger wave on click
+            const bigWave = document.createElement('div');
+            bigWave.className = 'energy-wave';
+            bigWave.style.cssText = `
+                left: ${e.clientX}px;
+                top: ${e.clientY}px;
+                width: 30px;
+                height: 30px;
+                border-width: 3px;
+                animation: energyPulse 1s forwards;
+            `;
+            document.body.appendChild(bigWave);
+            
+            setTimeout(() => {
+                bigWave.remove();
+            }, 1000);
+        });
+    }
+
+    // Particle Pool Optimization
+    const particlePool = [];
+
+    function getParticle() {
+        return particlePool.pop() || document.createElement('div');
+    }
+
+    function recycleParticle(particle) {
+        particlePool.push(particle);
+    }
+
+    // Show loading state until all elements are ready
+    window.addEventListener('load', () => {
+        document.body.classList.add('loaded');
+    });
+
+    // Initialize all effects
+    document.addEventListener('DOMContentLoaded', () => {
+        createSunbeams(); // Golden Sunbeams
+        createShimmerWaves(); // ✨ Shimmer Waves
+        createFireSparks(); // 🔥 Fire Sparks
+        createGoldParticles(); // 💎 Gold Particles
+        createDivineLightRays(); // 🌅 Divine Light Rays
+        createParticleBursts(); // 💥 Particle Bursts
+        createEmbers(); // 🔥 Floating Embers
+        createFabricWaves(); // 🌊 Fabric Wave Ripples
+        createMouseTrail(); // Now properly implemented
+        
+        // Initialize these if they exist (you'll need to define them)
+        if (typeof initSmoothScrolling === 'function') {
+            initSmoothScrolling();
+        }
+        if (typeof initContactForm === 'function') {
+            initContactForm();
+        }
+    });
+</script>
+</body>
+</html>
